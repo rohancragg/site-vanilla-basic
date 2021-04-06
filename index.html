@@ -2,9 +2,9 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
   <title>Vanilla JavaScript App</title>
 </head>
 
@@ -16,7 +16,24 @@
   <!-- https://docs.microsoft.com/en-us/graph/toolkit/get-started/build-a-web-app?tabs=html%2CHTML -->
   <script src="https://unpkg.com/@microsoft/mgt/dist/bundle/mgt-loader.js"></script>
   <mgt-msal-provider client-id="0ea0c128-b04f-487a-a772-2aa7b661df05"></mgt-msal-provider>
-  <mgt-login></mgt-login>
+  <mgt-login>
+    <template data-type="signed-in-button-content">
+      {{personDetails.givenName}} is now signed in.
+    </template>
+    <template data-type="flyout-commands">
+      <div>
+        <button data-props="@click: handleSignOut">Sign Out</button>
+      </div>
+    </template>
+  </mgt-login>
+  <mgt-people>
+    <template>
+      <H3>My People</H3>
+      <ul><li data-for="person in people">
+        <mgt-person person-query="{{ person.userPrincipalName }}" view="twoLines" show-presence  person-card="hover"></mgt-person>
+      </li></ul>
+    </template>
+  </mgt-people>
 </body>
 
 </html>
